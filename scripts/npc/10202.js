@@ -22,19 +22,19 @@
 var status = -1;
 
 function start() {
-    cm.sendNext("Warriors possess an enormous power with stamina to back it up, and they shine the brightest in melee combat situation. Regular attacks are powerful to begin with, and armed with complex skills, the job is perfect for explosive attacks.");
+    cm.sendNext("战士拥有巨大的力量和体力作为后盾，在肉搏战中最为耀眼。普通攻击本来就威力巨大，加上复杂多变的技能，非常适合爆发式攻击。");
 }
 
 function action(mode, type, selection) {
     status++;
     if (mode != 1){
         if(mode == 0)
-           cm.sendNext("If you wish to experience what it's like to be a Warrior, come see me again.");
+           cm.sendNext("如果你想体验成为一名战士，就再来找我吧。");
         cm.dispose();
         return;
     }
     if (status == 0) {
-        cm.sendYesNo("Would you like to experience what it's like to be a Warrior?");
+        cm.sendYesNo("想体验成为一名战士吗？");
     } else if (status == 1){
 	cm.lockUI();
         cm.warp(1020100, 0);
