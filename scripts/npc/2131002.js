@@ -5,6 +5,6 @@
 */
 
 function start(){
-	cm.sendOk("My name is #p2131002#... As you can see, I am a fairy. People tell me I do not act fairy-like, but... I like making things out of metal objects. Shhh, don't tell this to anyone, but I also like MMA.");
+	cm.sendOk("我叫 #p2131002#... 正如你所见, 我是一个半精灵. 经常有人说我不像个妖精, 但是...我喜欢用金属制作东西. 嘘，别告诉任何人, 我还喜欢 MMA格斗.");
 	cm.dispose();
 	}

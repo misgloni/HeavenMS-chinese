@@ -13,22 +13,22 @@ function action(mode, type, selection) {
 	return;
     }
     if (status == 0) {
-        cm.sendSimple("These monsters are a piece of cake! One hit with my sword and I will kill them... better get a sword first.#b\r\n#L0#Hey, take these tree trunks. You can build a better sword with them.#l");
+        cm.sendSimple("这些怪物简直就是小菜一碟！用我的剑一击，我就会杀死他们……好吧, 最好先整把剑.#b\r\n#L0#拿走这些藤条, 你可以打造一把更好的剑. #l");
     } else if (status == 1) {
 	if (!cm.haveItem(exchangeItem, 100)) {
-	    cm.sendNext("You don't have enough... I need at least 100.");
+	    cm.sendNext("你身上的东西不太够...我需要100个.");
 	    cm.dispose();
 	} else {
-	    cm.sendGetNumber("Hey, that's a good idea! I can give you #i4310000#Perfect Pitch for each 100 #i" + exchangeItem + "##t" + exchangeItem + "# you give me. How many do you want? (Current Items: " + cm.itemQuantity(exchangeItem) + ")", Math.min(300, cm.itemQuantity(exchangeItem) / 100), 1, Math.min(300, cm.itemQuantity(exchangeItem) / 100));
+	    cm.sendGetNumber("这是个好办法! 我可以用 #i4310000# 绝对音感来换你100个 #i" + exchangeItem + "##t" + exchangeItem + "#. 你想换多少? (现在的物品数: " + cm.itemQuantity(exchangeItem) + ")", Math.min(300, cm.itemQuantity(exchangeItem) / 100), 1, Math.min(300, cm.itemQuantity(exchangeItem) / 100));
 	}
     } else if (status == 2) { 
 	if (selection >= 1 && selection <= cm.itemQuantity(exchangeItem) / 100) {
 	    if (!cm.canHold(4310000, selection)) {
-		cm.sendOk("Please make some space in ETC tab.");
+		cm.sendOk("请在 背包栏 预留足够的空间.");
 	    } else {
 		cm.gainItem(4310000, selection);
 		cm.gainItem(exchangeItem, -(selection * 100));
-		cm.sendOk("Thanks!");
+		cm.sendOk("感谢!");
 	    }
 	}
         cm.dispose();

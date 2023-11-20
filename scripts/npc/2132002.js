@@ -3,6 +3,6 @@ function start() {
 }
 
 function action(mode, type, selection) {
-    cm.sendNext("The magic of this forest is amazing...");
+    cm.sendNext("你也在探险吗？这里有很多危险的怪物……");
     cm.dispose();
 }
