@@ -113,13 +113,13 @@ public enum ItemFactory {
         equip.setExpiration(rs.getLong("expiration"));
         equip.setGiftFrom(rs.getString("giftFrom"));
         equip.setRingId(rs.getInt("ringid"));
-        
+
         return equip;
     }
     
     public static List<Pair<Item, Integer>> loadEquippedItems(int id, boolean isAccount, boolean login) throws SQLException {
         List<Pair<Item, Integer>> items = new ArrayList<>();
-        
+
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM ");
         query.append("(SELECT id, accountid FROM characters) AS accountterm ");
@@ -149,7 +149,7 @@ public enum ItemFactory {
     
     private List<Pair<Item, MapleInventoryType>> loadItemsCommon(int id, boolean login) throws SQLException {
         List<Pair<Item, MapleInventoryType>> items = new ArrayList<>();
-		
+
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = DatabaseConnection.getConnection();
@@ -212,10 +212,9 @@ public enum ItemFactory {
         Lock lock = locks[id % lockCount];
         lock.lock();
         try {
-            StringBuilder query = new StringBuilder();
-            query.append("DELETE `inventoryitems`, `inventoryequipment` FROM `inventoryitems` LEFT JOIN `inventoryequipment` USING(`inventoryitemid`) WHERE `type` = ? AND `");
-            query.append(account ? "accountid" : "characterid").append("` = ?");
-            ps = con.prepareStatement(query.toString());
+            String query = "DELETE `inventoryitems`, `inventoryequipment` FROM `inventoryitems` LEFT JOIN `inventoryequipment` USING(`inventoryitemid`) WHERE `type` = ? AND `" +
+                    (account ? "accountid" : "characterid") + "` = ?";
+            ps = con.prepareStatement(query);
             ps.setInt(1, value);
             ps.setInt(2, id);
             ps.executeUpdate();
@@ -387,11 +386,10 @@ public enum ItemFactory {
             ps.setInt(1, id);
             ps.executeUpdate();
             ps.close();
-            
-            StringBuilder query = new StringBuilder();
-            query.append("DELETE `inventoryitems`, `inventoryequipment` FROM `inventoryitems` LEFT JOIN `inventoryequipment` USING(`inventoryitemid`) WHERE `type` = ? AND `");
-            query.append(account ? "accountid" : "characterid").append("` = ?");
-            ps = con.prepareStatement(query.toString());
+
+            String query = "DELETE `inventoryitems`, `inventoryequipment` FROM `inventoryitems` LEFT JOIN `inventoryequipment` USING(`inventoryitemid`) WHERE `type` = ? AND `" +
+                    (account ? "accountid" : "characterid") + "` = ?";
+            ps = con.prepareStatement(query);
             ps.setInt(1, value);
             ps.setInt(2, id);
             ps.executeUpdate();

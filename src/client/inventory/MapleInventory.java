@@ -50,7 +50,7 @@ import server.ThreadManager;
  */
 public class MapleInventory implements Iterable<Item> {
     protected MapleCharacter owner;
-    protected Map<Short, Item> inventory = new LinkedHashMap<>();
+    protected Map<Short, Item> inventory;
     protected byte slotLimit;
     protected MapleInventoryType type;
     protected boolean checked = false;
@@ -196,14 +196,9 @@ public class MapleInventory implements Iterable<Item> {
         }
         
         if (ret.size() > 1) {
-            Collections.sort(ret, new Comparator<Item>() {
-                @Override
-                public int compare(Item i1, Item i2) {
-                    return i1.getPosition() - i2.getPosition();
-                }
-            });
+            Collections.sort(ret, (i1, i2) -> i1.getPosition() - i2.getPosition());
         }
-        
+
         return ret;
     }
     
@@ -607,7 +602,7 @@ public class MapleInventory implements Iterable<Item> {
                         //for(Integer i : typesSlotsUsed) System.out.print(" " + i);
                         int result = MapleInventoryManipulator.checkSpaceProgressively(c, itemId, itValue, rcvOwners.get(it.getKey()), usedSlots, useProofInv);
                         boolean hasSpace = ((result % 2) != 0);
-                        //System.out.print(" -> hasSpace: " + hasSpace + " RESULT : " + result + "\n");
+                        //System.out.print(" -> hasSpace: " + hasSpace + " RESULT : " + result + "\r\n");
 
                         if(!hasSpace) return false;
                         typesSlotsUsed.set(itemType, (result >> 1));

@@ -409,29 +409,6 @@ public class MapleMonster extends AbstractLoadedMapleLife {
                 return false;
             }
 
-            /* pyramid not implemented
-            Pair<Integer, Integer> cool = this.getStats().getCool();
-            if (cool != null) {
-                Pyramid pq = (Pyramid) chr.getPartyQuest();
-                if (pq != null) {
-                    if (damage > 0) {
-                        if (damage >= cool.getLeft()) {
-                            if ((Math.random() * 100) < cool.getRight()) {
-                                pq.cool();
-                            } else {
-                                pq.kill();
-                            }
-                        } else {
-                            pq.kill();
-                        }
-                    } else {
-                        pq.miss();
-                    }
-                    killed = true;
-                }
-            }
-            */
-
             if (damage > 0) {
                 this.applyDamage(attacker, damage, stayAlive, false);
                 if (!this.isAlive()) {  // monster just died
@@ -1261,15 +1238,6 @@ public class MapleMonster extends AbstractLoadedMapleLife {
             } else {
                 return false;
             }
-            /*
-        } else if (status.getSkill().getId() == Hermit.SHADOW_WEB || status.getSkill().getId() == NightWalker.SHADOW_WEB) { //Shadow Web
-            int webDamage = (int) (getMaxHp() / 50.0 + 0.999);
-            status.setValue(MonsterStatus.SHADOW_WEB, Integer.valueOf(webDamage));
-            animationTime = broadcastStatusEffect(status);
-            
-            overtimeAction = new DamageTask(webDamage, from, status, 1);
-            overtimeDelay = 3500;
-            */
         } else if (status.getSkill().getId() == 4121004 || status.getSkill().getId() == 4221004) { // Ninja Ambush
             final Skill skill = SkillFactory.getSkill(status.getSkill().getId());
             final byte level = from.getSkillLevel(skill);

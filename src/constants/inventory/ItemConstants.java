@@ -151,8 +151,7 @@ public final class ItemConstants {
     
     public static boolean isFlagModifier(int scrollId, short flag) {
         if(scrollId == 2041058 && ((flag & ItemConstants.COLD) == ItemConstants.COLD)) return true;
-        if(scrollId == 2040727 && ((flag & ItemConstants.SPIKES) == ItemConstants.SPIKES)) return true;
-        return false;
+        return scrollId == 2040727 && ((flag & ItemConstants.SPIKES) == ItemConstants.SPIKES);
     }
     
     public static boolean isChaosScroll(int scrollId) {
@@ -191,10 +190,10 @@ public final class ItemConstants {
         
         MapleInventoryType ret = MapleInventoryType.UNDEFINED;
         
-	final byte type = (byte) (itemId / 1000000);
-	if (type >= 1 && type <= 5) {
-	    ret = MapleInventoryType.getByType(type);
-	}
+        final byte type = (byte) (itemId / 1000000);
+        if (type >= 1 && type <= 5) {
+            ret = MapleInventoryType.getByType(type);
+        }
         
         inventoryTypeCache.put(itemId, ret);
         return ret;

@@ -44,7 +44,7 @@ import provider.MapleDataTool;
  */
 public class MobSkillFactory {
 
-    private static Map<String, MobSkill> mobSkills = new HashMap<String, MobSkill>();
+    private static Map<String, MobSkill> mobSkills = new HashMap<>();
     private final static MapleDataProvider dataSource = MapleDataProviderFactory.getDataProvider(new File(System.getProperty("wzpath") + "/Skill.wz"));
     private static MapleData skillRoot = dataSource.getData("MobSkill.img");
     private final static MonitoredReentrantReadWriteLock dataLock = new MonitoredReentrantReadWriteLock(MonitoredLockType.MOBSKILL_FACTORY);
@@ -75,16 +75,16 @@ public class MobSkillFactory {
                         if (skillData.getChildByPath(String.valueOf(i)) == null) {
                             break;
                         }
-                        toSummon.add(Integer.valueOf(MapleDataTool.getInt(skillData.getChildByPath(String.valueOf(i)), 0)));
+                        toSummon.add(MapleDataTool.getInt(skillData.getChildByPath(String.valueOf(i)), 0));
                     }
                     int effect = MapleDataTool.getInt("summonEffect", skillData, 0);
                     int hp = MapleDataTool.getInt("hp", skillData, 100);
                     int x = MapleDataTool.getInt("x", skillData, 1);
                     int y = MapleDataTool.getInt("y", skillData, 1);
-                    long duration = MapleDataTool.getInt("time", skillData, 0) * 1000;
-                    long cooltime = MapleDataTool.getInt("interval", skillData, 0) * 1000;
+                    long duration = MapleDataTool.getInt("time", skillData, 0) * 1000L;
+                    long cooltime = MapleDataTool.getInt("interval", skillData, 0) * 1000L;
                     int iprop = MapleDataTool.getInt("prop", skillData, 100);
-                    float prop = iprop / 100;
+                    float prop = (float)iprop / 100;
                     int limit = MapleDataTool.getInt("limit", skillData, 0);
                     MapleData ltd = skillData.getChildByPath("lt");
                     Point lt = null;

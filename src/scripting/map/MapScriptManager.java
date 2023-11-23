@@ -83,12 +83,10 @@ public class MapScriptManager extends AbstractScriptManager {
             scripts.put(mapScriptPath, iv);
             iv.invokeFunction("start", new MapScriptMethods(c));
             return true;
-        } catch (final UndeclaredThrowableException | ScriptException ute) {
+        } catch (final Exception ute) {
             FilePrinter.printError(FilePrinter.MAP_SCRIPT + mapScriptPath + ".txt", ute);
-        } catch (final Exception e) {
-            FilePrinter.printError(FilePrinter.MAP_SCRIPT + mapScriptPath + ".txt", e);
         }
-        
+
         return false;
     }
 }

@@ -383,7 +383,7 @@ public class Equip extends Item {
     public Pair<String, Pair<Boolean, Boolean>> gainStats(List<Pair<StatUpgrade, Integer>> stats) {
         boolean gotSlot = false, gotVicious = false;
         String lvupStr = "";
-        Integer statUp, maxStat = YamlConfig.config.server.MAX_EQUIPMNT_STAT;
+        int statUp, maxStat = YamlConfig.config.server.MAX_EQUIPMNT_STAT;
         for (Pair<StatUpgrade, Integer> stat : stats) {
             switch (stat.getLeft()) {
                 case incDEX:
@@ -615,7 +615,7 @@ public class Equip extends Item {
         String eqpName = ii.getName(getItemId());
         String eqpInfo = reachedMaxLevel() ? " #e#rMAX LEVEL#k#n" : (" EXP: #e#b" + (int)itemExp + "#k#n / " + ExpTable.getEquipExpNeededForLevel(itemLevel));
         
-        return "'" + eqpName + "' -> LV: #e#b" + itemLevel + "#k#n    " + eqpInfo + "\r\n";
+        return "'" + eqpName + "' -> LV: #e#b" + itemLevel + "#k#n    " + eqpInfo + "\r\r\n";
     }
 
     private static void showLevelupMessage(String msg, MapleClient c) {

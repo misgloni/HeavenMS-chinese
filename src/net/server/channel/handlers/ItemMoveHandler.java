@@ -40,12 +40,12 @@ public final class ItemMoveHandler extends AbstractMaplePacketHandler {
             c.announce(MaplePacketCreator.enableActions());
             return;
         }
-        
+
         MapleInventoryType type = MapleInventoryType.getByType(slea.readByte());
         short src = slea.readShort();     //is there any reason to use byte instead of short in src and action?
         short action = slea.readShort();
         short quantity = slea.readShort();
-        
+
         if (src < 0 && action > 0) {
             MapleInventoryManipulator.unequip(c, src, action);
         } else if (action < 0) {

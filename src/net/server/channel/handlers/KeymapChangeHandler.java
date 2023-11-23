@@ -26,15 +26,13 @@ import client.MapleClient;
 import client.keybind.MapleKeyBinding;
 import client.Skill;
 import client.SkillFactory;
-import client.autoban.AutobanFactory;
 import client.inventory.MapleInventoryType;
 import net.AbstractMaplePacketHandler;
-import tools.FilePrinter;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class KeymapChangeHandler extends AbstractMaplePacketHandler {
 	@Override
-	public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+	public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
                 if (slea.available() >= 8) {
 			int mode = slea.readInt();
 			if(mode == 0) {
@@ -44,24 +42,17 @@ public final class KeymapChangeHandler extends AbstractMaplePacketHandler {
 					int type = slea.readByte();
 					int action = slea.readInt();
                                         
-                                        if(type == 1) {
-                                                Skill skill = SkillFactory.getSkill(action);
-                                                boolean isBanndedSkill;
-                                                if (skill != null) {
-                                                        isBanndedSkill = GameConstants.bannedBindSkills(skill.getId());
-                                                        if (isBanndedSkill || (!c.getPlayer().isGM() && GameConstants.isGMSkills(skill.getId())) || (!GameConstants.isInJobTree(skill.getId(), c.getPlayer().getJob().getId()) && !c.getPlayer().isGM())) { //for those skills are are "technically" in the beginner tab, like bamboo rain in Dojo or skills you find in PYPQ
-                                                                //AutobanFactory.PACKET_EDIT.alert(c.getPlayer(), c.getPlayer().getName() + " tried to packet edit keymapping.");
-                                                                //FilePrinter.printError(FilePrinter.EXPLOITS + c.getPlayer().getName() + ".txt", c.getPlayer().getName() + " tried to use skill " + skill.getId());
-                                                                //c.disconnect(true, false);
-                                                                //return;
+					if(type == 1) {
+							Skill skill = SkillFactory.getSkill(action);
+							boolean isBanndedSkill;
+							if (skill != null) {
+									isBanndedSkill = GameConstants.bannedBindSkills(skill.getId());
+									if (isBanndedSkill || (!c.getPlayer().isGM() && GameConstants.isGMSkills(skill.getId())) || (!GameConstants.isInJobTree(skill.getId(), c.getPlayer().getJob().getId()) && !c.getPlayer().isGM())) { //for those skills are are "technically" in the beginner tab, like bamboo rain in Dojo or skills you find in PYPQ
 
-                                                                continue;   // fk that
-                                                        }
-                                                        /* if (c.getPlayer().getSkillLevel(skill) < 1) {    HOW WOULD A SKILL EVEN BE AVAILABLE TO KEYBINDING
-                                                                continue;                                   IF THERE IS NOT EVEN A SINGLE POINT USED INTO IT??
-                                                        } */
-                                                }
-                                        }
+											continue;   // fk that
+									}
+							}
+					}
                                         
 					c.getPlayer().changeKeybinding(key, new MapleKeyBinding(type, action));
 				}

@@ -161,7 +161,7 @@ public class DueyProcessor {
     }
 
     private static void deletePackageFromInventoryDB(Connection con, int packageId) throws SQLException {
-        ItemFactory.DUEY.saveItems(new LinkedList<Pair<Item, MapleInventoryType>>(), packageId, con);
+        ItemFactory.DUEY.saveItems(new LinkedList<>(), packageId, con);
     }
     
     private static void removePackageFromDB(int packageId) {
@@ -358,7 +358,7 @@ public class DueyProcessor {
                     c.disconnect(true, false);
                     return;
                 }
-                
+
                 Pair<Integer, Integer> accIdCid;
                 if (c.getPlayer().getMeso() >= finalcost) {
                     accIdCid = getAccountCharacterIdFromCNAME(recipient);

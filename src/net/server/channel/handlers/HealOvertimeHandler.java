@@ -33,14 +33,14 @@ import tools.MaplePacketCreator;
 
 public final class HealOvertimeHandler extends AbstractMaplePacketHandler {
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         MapleCharacter chr = c.getPlayer();
         if(!chr.isLoggedinWorld()) return;
         
         AutobanManager abm = chr.getAutobanManager();
         int timestamp = Server.getInstance().getCurrentTimestamp();
         slea.skip(8);
-        
+
         short healHP = slea.readShort();
         if (healHP != 0) {
             abm.setTimestamp(8, timestamp, 28);  // thanks Vcoc & Thora for pointing out d/c happening here

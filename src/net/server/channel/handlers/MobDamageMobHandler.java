@@ -42,7 +42,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  */
 public final class MobDamageMobHandler extends AbstractMaplePacketHandler {
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         int from = slea.readInt();
         slea.readInt();
         int to = slea.readInt();
