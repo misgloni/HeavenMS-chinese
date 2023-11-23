@@ -284,7 +284,7 @@ public class MapleInventoryManipulator {
         MapleCharacter chr = c.getPlayer();
         MapleInventory inv = chr.getInventory(type);
         
-        if (ii.isPickupRestricted(itemid)) {
+        if (ii.isPickupRestricted(itemid) && (itemid != 5211060)) { //三倍经验卡, 暂时不知道为什么需要排除这个部分
             if (haveItemWithId(inv, itemid)) {
                 return false;
             } else if (ItemConstants.isEquipment(itemid) && haveItemWithId(chr.getInventory(MapleInventoryType.EQUIPPED), itemid)) {
