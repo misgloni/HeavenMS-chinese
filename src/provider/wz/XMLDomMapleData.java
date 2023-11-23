@@ -50,14 +50,10 @@ public class XMLDomMapleData implements MapleData {
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(fis);
 			this.node = document.getFirstChild();
-		} catch (ParserConfigurationException e) {
-			throw new RuntimeException(e);
-		} catch (SAXException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
+		} catch (ParserConfigurationException | IOException | SAXException e) {
 			throw new RuntimeException(e);
 		}
-		this.imageDataDir = imageDataDir;
+        this.imageDataDir = imageDataDir;
 	}
 
 	private XMLDomMapleData(Node node) {

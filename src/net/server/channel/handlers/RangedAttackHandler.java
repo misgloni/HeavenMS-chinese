@@ -53,12 +53,6 @@ public final class RangedAttackHandler extends AbstractDealDamageHandler {
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         MapleCharacter chr = c.getPlayer();
-        
-        /*long timeElapsed = currentServerTime() - chr.getAutobanManager().getLastSpam(8);
-        if(timeElapsed < 300) {
-            AutobanFactory.FAST_ATTACK.alert(chr, "Time: " + timeElapsed);
-        }
-        chr.getAutobanManager().spam(8);*/
 		
         AttackInfo attack = parseDamage(slea, chr, true, false);
         

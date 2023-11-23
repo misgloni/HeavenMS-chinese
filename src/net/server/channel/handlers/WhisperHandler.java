@@ -45,7 +45,7 @@ import java.sql.Connection;
 public final class WhisperHandler extends AbstractMaplePacketHandler {
     
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         byte mode = slea.readByte();
         if (mode == 6) { // whisper
             String recipient = slea.readMapleAsciiString();
